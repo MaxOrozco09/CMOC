@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contacto — CMOC Digital Consulting</title>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.page-hero {
+  padding: 10rem 5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+#cont-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.page-hero-inner { position: relative; z-index: 1; max-width: 700px; }
+.lead { font-size: 1.05rem; color: rgba(255,255,255,0.42); line-height: 1.85; max-width: 600px; margin-top: 1rem; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-hero-inner > * { opacity: 0; }
+.page-hero-inner .section-label { animation: fadeUp 0.5s ease 0.1s both; }
+.page-hero-inner h1            { animation: fadeUp 0.6s ease 0.2s both; }
+.page-hero-inner .lead         { animation: fadeUp 0.6s ease 0.35s both; }
+
+/* CONTACT SECTION */
+#contact-main {
+  padding: 6rem 5rem;
+  background: var(--black2);
+  position: relative;
+}
+#contact-main::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,204,0.15), transparent);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+/* LEFT SIDE */
+.contact-info {}
+.contact-info p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(0,229,204,0.08);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.contact-channel:hover {
+  border-color: rgba(0,229,204,0.2);
+  background: rgba(0,229,204,0.04);
+}
+
+.ch-icon {
+  width: 38px; height: 38px;
+  background: var(--teal-dim);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+.ch-icon svg { width: 18px; height: 18px; }
+
+.ch-text {}
+.ch-text small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: rgba(0,229,204,0.5);
+  margin-bottom: 2px;
+}
+.ch-text span {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.response-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,229,204,0.06);
+  border: 1px solid rgba(0,229,204,0.1);
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+}
+.response-badge strong { color: var(--teal); font-weight: 500; }
+.rb-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{ opacity:1;transform:scale(1); } 50%{ opacity:0.4;transform:scale(0.7); } }
+
+/* FORM */
+.contact-form {}
+.form-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(0,229,204,0.15);
+  color: var(--teal);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.contact-form h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.6rem;
+}
+
+.contact-form > p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.frow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.fg {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fg label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+}
+
+.fg input,
+.fg select,
+.fg textarea {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 0.82rem 1rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.fg input:focus,
+.fg select:focus,
+.fg textarea:focus { border-color: rgba(0,229,204,0.35); }
+.fg select option { background: #111; }
+.fg textarea { resize: vertical; min-height: 110px; }
+
+.form-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.form-foot small {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.22);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+/* SUCCESS */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0,229,204,0.15);
+  border-radius: 10px;
+  background: rgba(0,229,204,0.04);
+}
+.form-success.show { display: block; }
+.form-success svg { color: var(--teal); width: 40px; height: 40px; margin: 0 auto 1rem; }
+.form-success h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin-bottom: 0.5rem; }
+.form-success p  { font-size: 0.88rem; color: rgba(255,255,255,0.4); }
+
+/* FAQ */
+#faq {
+  padding: 6rem 5rem;
+  background: var(--black);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+.faq-item {
+  padding: 1.8rem;
+  border: 1px solid rgba(0,229,204,0.07);
+  border-radius: 10px;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.faq-item:hover { border-color: rgba(0,229,204,0.15); background: rgba(0,229,204,0.02); }
+.faq-item h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: -0.2px;
+  color: rgba(255,255,255,0.85);
+}
+.faq-item p { font-size: 0.83rem; color: rgba(255,255,255,0.35); line-height: 1.7; }
+
+@media (max-width: 1000px) {
+  .page-hero, #contact-main, #faq { padding: 5rem 1.5rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .frow { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="noise">
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <canvas id="cont-canvas"></canvas>
+  <div class="page-hero-inner">
+    <p class="section-label">Hablemos</p>
+    <h1 class="section-title">El Primer Paso<br/>No Cuesta Nada<em style="color:var(--teal)">.</em></h1>
+    <p class="lead">
+      Agenda tu diagnóstico digital gratuito. Analizamos tu negocio, identificamos oportunidades y te presentamos un plan de acción concreto — sin costo, sin compromiso, sin presión.
+    </p>
+  </div>
+</div>
+
+<section id="contact-main">
+  <div class="contact-grid">
+
+    <div class="contact-info reveal">
+      <p class="section-label">Canales de contacto</p>
+      <p>
+        Puedes contactarnos por el canal que prefieras. Nos comprometemos a responderte en un máximo de 24 horas con un primer análisis de tu situación y los siguientes pasos.
+      </p>
+
+      <div class="contact-channels">
+        <a href="mailto:contacto@cmocdigital.mx" class="contact-channel">
+          <div class="ch-icon">
+            <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M2 6l7 5 7-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ch-text">
+            <small>Email</small>
+            <span>contacto@cmocdigital.mx</span>
+          </div>
+        </a>
+        <a href="https://wa.me/5215523539636" target="_blank" class="contact-channel">
+          <div class="ch-icon">
+            <svg viewBox="0 0 18 18" fill="currentColor"><path d="M13.1 10.8c-.2-.1-1.3-.65-1.5-.72-.2-.07-.35-.1-.5.1-.15.22-.57.72-.7.87-.13.15-.26.17-.48.06-.22-.1-.94-.35-1.79-1.1-.66-.6-1.1-1.33-1.23-1.55-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.1-.5-1.21-.69-1.65-.18-.43-.37-.37-.5-.38h-.43c-.15 0-.39.06-.6.28-.2.22-.78.76-.78 1.86s.8 2.16.91 2.31c.11.15 1.58 2.41 3.83 3.38.54.23.96.37 1.28.47.54.17 1.03.15 1.42.09.43-.07 1.33-.54 1.52-1.07.19-.52.19-.97.13-1.07-.06-.1-.2-.16-.43-.27z"/><path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9c0 1.33.36 2.58.98 3.66L1.5 16.5l3.94-.96A7.46 7.46 0 009 16.5c4.14 0 7.5-3.36 7.5-7.5S13.14 1.5 9 1.5zm0 13.5c-1.18 0-2.3-.32-3.25-.87l-.23-.14-2.34.57.6-2.28-.15-.24A6 6 0 013 9c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6z"/></svg>
+          </div>
+          <div class="ch-text">
+            <small>WhatsApp</small>
+            <span>+52 55 0000 0000</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="response-badge">
+        <div class="rb-dot"></div>
+        Respondemos en menos de <strong>&nbsp;24 horas&nbsp;</strong> hábiles
+      </div>
+    </div>
+
+    <div class="contact-form reveal reveal-delay-1">
+      <div class="form-badge"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="display:inline;vertical-align:middle;margin-right:6px"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M8 8l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Diagnóstico Gratuito</div>
+      <h3>Cuéntanos sobre tu Negocio</h3>
+      <p>Comparte algunos detalles y nuestro equipo preparará un análisis personalizado de las oportunidades digitales para tu empresa.</p>
+
+      <form class="form-fields" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div class="fg">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre completo" required/>
+          </div>
+          <div class="fg">
+            <label>Empresa / Negocio</label>
+            <input type="text" placeholder="Nombre de tu empresa" required/>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>WhatsApp</label>
+            <input type="tel" placeholder="+52 55 0000 0000"/>
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" placeholder="tu@correo.com" required/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Giro del negocio</label>
+          <select>
+            <option value="">Selecciona el giro...</option>
+            <option>Restaurante / Alimentos y bebidas</option>
+            <option>Consultorio / Salud</option>
+            <option>Comercio / Retail</option>
+            <option>Servicios profesionales</option>
+            <option>Manufactura / Taller</option>
+            <option>Educación</option>
+            <option>Tecnología</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Servicio de interés</label>
+          <select>
+            <option value="">¿En qué podemos ayudarte?</option>
+            <option>Consultoría estratégica</option>
+            <option>Automatización de procesos</option>
+            <option>Página web o tienda en línea</option>
+            <option>Desarrollo de software a la medida</option>
+            <option>Gestión IT integral</option>
+            <option>Marketing digital</option>
+            <option>No sé, necesito orientación</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>¿Cuál es tu mayor reto hoy?</label>
+          <textarea placeholder="Cuéntanos brevemente qué está frenando el crecimiento de tu negocio o qué quieres mejorar. No hay respuesta incorrecta."></textarea>
+        </div>
+        <div class="form-foot">
+          <small>Tu información es confidencial y nunca será compartida.</small>
+          <button type="submit" class="btn btn-primary">
+            Enviar solicitud
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 20l6 6 10-12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h4>¡Recibimos tu Mensaje!</h4>
+        <p>Nuestro equipo revisará tu solicitud y te contactará en un máximo de 24 horas con un análisis preliminar y los próximos pasos.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <p class="section-label reveal">Preguntas frecuentes</p>
+  <h2 class="section-title reveal">Dudas Comunes<em style="color:var(--teal)">.</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <h4>¿El Diagnóstico Gratuito Tiene Algún Compromiso?</h4>
+      <p>Ninguno. El diagnóstico es completamente gratuito y no genera ningún compromiso de tu parte. Es nuestra forma de presentarnos y demostrar el valor que podemos aportar a tu negocio.</p>
+    </div>
+    <div class="faq-item reveal reveal-delay-1">
+      <h4>¿Trabajan con Negocios de Cualquier Tamaño?</h4>
+      <p>Sí. Diseñamos soluciones adaptadas al tamaño y presupuesto de cada empresa. Desde negocios familiares que necesitan su primera página web hasta empresas medianas con proyectos de automatización complejos.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>¿Cuánto Tiempo Tarda un Proyecto Típico?</h4>
+      <p>Depende del alcance. Una página web puede estar lista en 2-3 semanas. Un sistema a la medida puede tomar 2-3 meses. Te damos tiempos claros y realistas desde la propuesta, y los cumplimos.</p>
+    </div>
+    <div class="faq-item reveal reveal-delay-1">
+      <h4>¿Qué Pasa Si No Sé Exactamente Qué Necesito?</h4>
+      <p>Ese es exactamente el punto de partida más común. Para eso existe el diagnóstico: te ayudamos a entender qué necesita tu negocio antes de hablar de soluciones o precios.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>¿Cómo Son sus Precios?</h4>
+      <p>Cada proyecto se cotiza de forma personalizada. No tenemos paquetes fijos porque creemos que forzar tu negocio en una caja predefinida no genera los mejores resultados. El precio siempre es claro, transparente y sin extras ocultos.</p>
+    </div>
+    <div class="faq-item reveal reveal-delay-1">
+      <h4>¿Ofrecen Soporte Después de Entregar el Proyecto?</h4>
+      <p>Sí, siempre. Tenemos planes de soporte y mantenimiento mensual para todos nuestros productos. Y aunque no contrates soporte formal, siempre estamos disponibles para resolver dudas rápidas.</p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+  injectNav('contacto.html');
+  injectFooter();
+  initParticleBg('cont-canvas');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').classList.add('show');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nosotros — CMOC Digital Consulting</title>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.page-hero {
+  padding: 10rem 5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+#nos-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.page-hero-inner { position: relative; z-index: 1; max-width: 700px; }
+.lead {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.85;
+  max-width: 600px;
+  margin-top: 1rem;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-hero-inner > * { opacity: 0; }
+.page-hero-inner .section-label { animation: fadeUp 0.5s ease 0.1s both; }
+.page-hero-inner h1            { animation: fadeUp 0.6s ease 0.2s both; }
+.page-hero-inner .lead         { animation: fadeUp 0.6s ease 0.35s both; }
+
+/* MISSION */
+#mission {
+  padding: 6rem 5rem;
+  background: var(--black2);
+  position: relative;
+}
+#mission::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,204,0.15), transparent);
+}
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: rgba(0,229,204,0.07);
+  border: 1px solid rgba(0,229,204,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 3.5rem;
+}
+.mission-card {
+  background: var(--black2);
+  padding: 2.5rem;
+  transition: background 0.25s;
+}
+.mission-card:hover { background: rgba(0,229,204,0.03); }
+.mission-card .m-icon {
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+.mission-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.3px;
+}
+.mission-card p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.75;
+}
+
+/* VALUES */
+#values {
+  padding: 6rem 5rem;
+  background: var(--black);
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+.value-item {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1.8rem;
+  border: 1px solid rgba(0,229,204,0.07);
+  border-radius: 10px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.value-item:hover {
+  border-color: rgba(0,229,204,0.18);
+  background: rgba(0,229,204,0.03);
+}
+.value-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--teal);
+  letter-spacing: 2px;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+.value-text h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.2px;
+}
+.value-text p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.7;
+}
+
+/* TEAM */
+#team {
+  padding: 6rem 5rem;
+  background: var(--black2);
+  position: relative;
+}
+#team::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,204,0.15), transparent);
+}
+.team-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+.team-intro p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+.team-intro strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+/* Profile cards */
+.team-roles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.role-card {
+  background: var(--black3);
+  border: 1px solid rgba(0,229,204,0.07);
+  border-radius: 10px;
+  padding: 2rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.role-card:hover {
+  border-color: rgba(0,229,204,0.2);
+  transform: translateY(-3px);
+}
+.role-avatar {
+  width: 52px;
+  height: 52px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(0,229,204,0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+  margin-bottom: 1.2rem;
+}
+.role-avatar svg { width: 24px; height: 24px; }
+.role-card h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.2px;
+}
+.role-card .role-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--teal);
+  letter-spacing: 2px;
+  margin-bottom: 0.9rem;
+}
+.role-card p {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.65;
+}
+
+/* EXP STRIP */
+#exp-strip {
+  padding: 5rem;
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(0,229,204,0.06);
+  border: 1px solid rgba(0,229,204,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+.exp-item {
+  background: var(--black);
+  padding: 2rem;
+  text-align: center;
+  transition: background 0.2s;
+}
+.exp-item:hover { background: rgba(0,229,204,0.03); }
+.exp-item .exp-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--teal);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.exp-item p {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1000px) {
+  .page-hero, #mission, #values, #team, #exp-strip { padding: 5rem 1.5rem; }
+  .mission-grid, .team-intro, .team-roles { grid-template-columns: 1fr 1fr; }
+  .exp-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .mission-grid, .values-grid, .team-roles, .exp-grid { grid-template-columns: 1fr; }
+  .team-intro { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body class="noise">
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <canvas id="nos-canvas"></canvas>
+  <div class="page-hero-inner">
+    <p class="section-label">Quiénes somos</p>
+    <h1 class="section-title">Expertos que Han<br/>Trabajado con las<br/><em style="color:var(--teal)">Mejores Empresas.</em></h1>
+    <p class="lead">
+      CMOC Digital Consulting nació de una convicción simple: la tecnología que usan las grandes corporaciones debería estar al alcance de cualquier empresa. Somos el equipo que hace eso posible.
+    </p>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section id="mission">
+  <p class="section-label reveal">Nuestra razón de ser</p>
+  <h2 class="section-title reveal">Lo que nos Mueve<em style="color:var(--teal)">.</em></h2>
+  <div class="mission-grid">
+    <div class="mission-card reveal">
+      <div class="m-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="color:var(--teal)">
+          <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.3"/>
+          <circle cx="16" cy="16" r="9" stroke="currentColor" stroke-width="1.3" opacity="0.5"/>
+          <circle cx="16" cy="16" r="4" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>Misión</h3>
+      <p>Democratizar el acceso a tecnología de clase mundial para empresas de todos los tamaños, entregando soluciones que generan resultados reales y medibles desde el primer día.</p>
+    </div>
+    <div class="mission-card reveal reveal-delay-1">
+      <div class="m-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="color:var(--teal)">
+          <path d="M4 26l8-10 6 5 10-15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="26" cy="7" r="3" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M4 26h24" stroke="currentColor" stroke-width="1" opacity="0.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Visión</h3>
+      <p>Convertirnos en el aliado tecnológico de referencia para empresas que quieren crecer de forma inteligente, eficiente y sostenible en la economía digital.</p>
+    </div>
+    <div class="mission-card reveal reveal-delay-2">
+      <div class="m-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="color:var(--teal)">
+          <path d="M18 4L8 18h8l-2 10 14-16h-8l2-8z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Propósito</h3>
+      <p>Que ningún negocio con potencial de crecer se quede atrás por falta de acceso a tecnología, estrategia o talento digital de calidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <p class="section-label reveal">Cómo trabajamos</p>
+  <h2 class="section-title reveal">Nuestros Valores<em style="color:var(--teal)">.</em></h2>
+  <div class="values-grid">
+    <div class="value-item reveal">
+      <div class="value-num">01</div>
+      <div class="value-text">
+        <h4>Resultados sobre Procesos</h4>
+        <p>No nos interesa el trabajo por el trabajo. Cada decisión que tomamos está orientada a generar valor real para tu negocio en el menor tiempo posible.</p>
+      </div>
+    </div>
+    <div class="value-item reveal reveal-delay-1">
+      <div class="value-num">02</div>
+      <div class="value-text">
+        <h4>Transparencia Total</h4>
+        <p>Siempre sabes qué estamos haciendo, por qué y cuánto cuesta. Sin sorpresas, sin letra chica, sin promesas que no podemos cumplir.</p>
+      </div>
+    </div>
+    <div class="value-item reveal reveal-delay-1">
+      <div class="value-num">03</div>
+      <div class="value-text">
+        <h4>Calidad sin Concesiones</h4>
+        <p>Lo que entregamos debe ser algo de lo que tanto nosotros como nuestros clientes estemos orgullosos. No hacemos trabajo a medias.</p>
+      </div>
+    </div>
+    <div class="value-item reveal reveal-delay-2">
+      <div class="value-num">04</div>
+      <div class="value-text">
+        <h4>Relaciones de Largo Plazo</h4>
+        <p>No buscamos clientes de una sola vez. Queremos convertirnos en el aliado tecnológico que acompaña el crecimiento de tu empresa año tras año.</p>
+      </div>
+    </div>
+    <div class="value-item reveal">
+      <div class="value-num">05</div>
+      <div class="value-text">
+        <h4>Aprendizaje Continuo</h4>
+        <p>La tecnología evoluciona rápido. Nos mantenemos a la vanguardia para que las soluciones que construimos hoy no sean obsoletas mañana.</p>
+      </div>
+    </div>
+    <div class="value-item reveal reveal-delay-1">
+      <div class="value-num">06</div>
+      <div class="value-text">
+        <h4>Accesibilidad Real</h4>
+        <p>Creemos que el precio no debería ser el obstáculo entre un negocio y su potencial. Siempre encontramos la forma de hacer que funcione.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <p class="section-label reveal">El equipo</p>
+  <h2 class="section-title reveal">Talento de Nivel<br/>Enterprise<em style="color:var(--teal)">.</em></h2>
+
+  <div class="team-intro">
+    <div class="reveal">
+      <p>
+        Nuestro equipo está conformado por <strong>consultores de estrategia, ingenieros de software, arquitectos de soluciones, especialistas en ciberseguridad y expertos en marketing digital</strong> con trayectorias en proyectos de alto impacto para organizaciones de primer nivel en México.
+      </p>
+      <p>
+        Cada miembro del equipo aporta una combinación única de experiencia técnica y visión de negocio — algo que rara vez se encuentra en una sola firma. Esa combinación es lo que nos permite entregar soluciones que no solo funcionan técnicamente, sino que también tienen sentido para el negocio.
+      </p>
+      <p>
+        Hemos trabajado con instituciones financieras, empresas de telecomunicaciones, retail y manufactura de escala nacional, llevando proyectos de transformación digital, modernización de sistemas y estrategia tecnológica. Todo ese conocimiento está ahora disponible para tu empresa.
+      </p>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p>
+        No somos una agencia de freelancers conectados por un chat — somos un equipo consolidado con metodologías claras, procesos definidos y una cultura de trabajo orientada completamente a los resultados de nuestros clientes.
+      </p>
+      <p>
+        Creemos que la diversidad de perfiles dentro del equipo es nuestra mayor fortaleza. <strong>Un consultor de estrategia, un ingeniero y un diseñador que trabajan juntos desde el inicio de un proyecto generan soluciones muy superiores a las de cualquier especialista individual.</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="team-roles">
+    <div class="role-card reveal">
+      <div class="role-avatar">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4>Consultoría Estratégica</h4>
+      <div class="role-title">STRATEGY · IT CONSULTING</div>
+      <p>Estrategia de transformación digital, análisis de procesos, arquitectura de soluciones y gestión de proyectos de alto impacto con metodologías COBIT, ITIL y PMI.</p>
+    </div>
+    <div class="role-card reveal reveal-delay-1">
+      <div class="role-avatar">
+        <svg viewBox="0 0 24 24" fill="none">
+          <polyline points="16 18 22 12 16 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="8 6 2 12 8 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4>Ingeniería y Desarrollo</h4>
+      <div class="role-title">SOFTWARE · CLOUD · DEVOPS</div>
+      <p>Desarrollo de software a la medida, arquitectura cloud, automatización de infraestructura y construcción de sistemas escalables con tecnologías modernas.</p>
+    </div>
+    <div class="role-card reveal reveal-delay-2">
+      <div class="role-avatar">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h4>Diseño y UX</h4>
+      <div class="role-title">UX/UI · BRANDING · DIGITAL</div>
+      <p>Diseño de interfaces, experiencia de usuario, identidad visual y productos digitales que combinan estética con funcionalidad para maximizar resultados.</p>
+    </div>
+    <div class="role-card reveal">
+      <div class="role-avatar">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4>Ciberseguridad</h4>
+      <div class="role-title">SECURITY · COMPLIANCE · RISK</div>
+      <p>Evaluación de riesgos, implementación de controles de seguridad, cumplimiento normativo y protección de activos digitales críticos del negocio.</p>
+    </div>
+    <div class="role-card reveal reveal-delay-1">
+      <div class="role-avatar">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4>Datos e Inteligencia</h4>
+      <div class="role-title">DATA · BI · AI APPLIED</div>
+      <p>Análisis de datos, inteligencia de negocio, dashboards ejecutivos e implementación de soluciones de inteligencia artificial aplicada a procesos reales.</p>
+    </div>
+    <div class="role-card reveal reveal-delay-2">
+      <div class="role-avatar">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h4>Marketing Digital</h4>
+      <div class="role-title">GROWTH · ADS · CONTENT</div>
+      <p>Estrategia de crecimiento digital, gestión de campañas, posicionamiento en buscadores y construcción de audiencias que se convierten en clientes reales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXP STRIP -->
+<section id="exp-strip">
+  <p class="section-label reveal">Nuestra trayectoria</p>
+  <h2 class="section-title reveal">Experiencia que Respalda<br/>Cada Proyecto<em style="color:var(--teal)">.</em></h2>
+  <div class="exp-grid">
+    <div class="exp-item reveal">
+      <div class="exp-num">Enterprise</div>
+      <p>Experiencia en proyectos con empresas líderes del sector financiero, telecomunicaciones y retail en México</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-1">
+      <div class="exp-num">24h</div>
+      <p>Tiempo máximo de respuesta garantizado para cualquier solicitud o incidencia de nuestros clientes</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-2">
+      <div class="exp-num">6+</div>
+      <p>Disciplinas representadas en el equipo: estrategia, desarrollo, diseño, datos, seguridad y marketing</p>
+    </div>
+    <div class="exp-item reveal reveal-delay-3">
+      <div class="exp-num">100%</div>
+      <p>De nuestras soluciones son diseñadas a la medida de las necesidades y presupuesto de cada cliente</p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+  injectNav('nosotros.html');
+  injectFooter();
+  initParticleBg('nos-canvas');
+</script>
+</body>
+</html>

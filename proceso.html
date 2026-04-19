@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Proceso — CMOC Digital Consulting</title>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.page-hero {
+  padding: 10rem 5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+#proc-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.page-hero-inner { position: relative; z-index: 1; max-width: 700px; }
+.lead { font-size: 1.05rem; color: rgba(255,255,255,0.42); line-height: 1.85; max-width: 600px; margin-top: 1rem; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-hero-inner > * { opacity: 0; }
+.page-hero-inner .section-label { animation: fadeUp 0.5s ease 0.1s both; }
+.page-hero-inner h1            { animation: fadeUp 0.6s ease 0.2s both; }
+.page-hero-inner .lead         { animation: fadeUp 0.6s ease 0.35s both; }
+
+/* STEPS */
+#steps {
+  padding: 6rem 5rem;
+  background: var(--black2);
+  position: relative;
+}
+#steps::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,204,0.15), transparent);
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.steps-list::before {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--teal), rgba(0,229,204,0.05));
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 2.5rem;
+  padding-bottom: 4rem;
+  position: relative;
+}
+
+.step:last-child { padding-bottom: 0; }
+
+.step-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--black2);
+  border: 1.5px solid rgba(0,229,204,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--teal);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.step:hover .step-circle {
+  background: var(--teal-dim);
+  border-color: var(--teal);
+}
+
+.step-body { padding-top: 0.8rem; }
+
+.step-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  color: rgba(0,229,204,0.4);
+  margin-bottom: 0.5rem;
+}
+
+.step-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.8rem;
+}
+
+.step-body p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.85;
+  max-width: 620px;
+  margin-bottom: 1.2rem;
+}
+
+.step-deliverables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.deliverable {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: rgba(0,229,204,0.6);
+  background: rgba(0,229,204,0.06);
+  border: 1px solid rgba(0,229,204,0.1);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+}
+
+/* COMMITMENT */
+#commitment {
+  padding: 6rem 5rem;
+  background: var(--black);
+}
+.commit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+.commit-card {
+  padding: 2rem;
+  border: 1px solid rgba(0,229,204,0.07);
+  border-radius: 10px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.commit-card:hover {
+  border-color: rgba(0,229,204,0.18);
+  background: rgba(0,229,204,0.02);
+}
+.commit-card svg { color: var(--teal); width: 28px; height: 28px; margin-bottom: 1rem; }
+.commit-card h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.commit-card p { font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .page-hero, #steps, #commitment { padding: 5rem 1.5rem; }
+  .commit-grid { grid-template-columns: 1fr 1fr; }
+  .step { grid-template-columns: 44px 1fr; gap: 1.5rem; }
+  .steps-list::before { left: 21px; }
+  .step-circle { width: 44px; height: 44px; font-size: 0.65rem; }
+}
+@media (max-width: 580px) {
+  .commit-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="noise">
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <canvas id="proc-canvas"></canvas>
+  <div class="page-hero-inner">
+    <p class="section-label">Cómo trabajamos</p>
+    <h1 class="section-title">Un Proceso Diseñado<br/>Para <em style="color:var(--teal)">Tu Tranquilidad.</em></h1>
+    <p class="lead">
+      Sabemos que confiarle la tecnología de tu negocio a alguien externo requiere confianza. Por eso nuestro proceso está diseñado para que en todo momento sepas exactamente qué está pasando, cuándo y por qué.
+    </p>
+  </div>
+</div>
+
+<section id="steps">
+  <p class="section-label reveal">El proceso</p>
+  <h2 class="section-title reveal">Cuatro Pasos para<br/>Transformar tu Negocio<em style="color:var(--teal)">.</em></h2>
+
+  <div class="steps-list">
+
+    <div class="step reveal">
+      <div class="step-circle">01</div>
+      <div class="step-body">
+        <div class="step-tag">DISCOVERY</div>
+        <h3>Diagnóstico Gratuito</h3>
+        <p>
+          Todo empieza con una conversación. Sin presentaciones, sin pitch de ventas. Queremos escuchar sobre tu negocio: cómo opera hoy, qué te está frenando, qué quieres lograr. Con esa información, nuestro equipo realiza un análisis completo de tu situación digital actual — procesos, sistemas, presencia en línea, oportunidades — y te entregamos un diagnóstico honesto y sin costo.
+        </p>
+        <p>
+          Este diagnóstico no es genérico. Es un análisis específico de tu negocio que ya tiene valor por sí solo, independientemente de si decides trabajar con nosotros.
+        </p>
+        <div class="step-deliverables">
+          <span class="deliverable">Análisis de situación actual</span>
+          <span class="deliverable">Identificación de oportunidades</span>
+          <span class="deliverable">Recomendaciones preliminares</span>
+          <span class="deliverable">Sin costo ni compromiso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-circle">02</div>
+      <div class="step-body">
+        <div class="step-tag">STRATEGY</div>
+        <h3>Propuesta a la Medida</h3>
+        <p>
+          Con el diagnóstico en mano, diseñamos una propuesta que responde exactamente a lo que tu negocio necesita. No hay paquetes predefinidos ni soluciones genéricas — cada propuesta es construida desde cero para tu caso específico, con alcance claro, tiempos de entrega definidos y precio transparente.
+        </p>
+        <p>
+          Te explicamos cada elemento de la propuesta, el razonamiento detrás de cada decisión y el impacto esperado en tu negocio. Tienes espacio para preguntar, ajustar y modificar hasta que la propuesta sea exactamente lo que necesitas.
+        </p>
+        <div class="step-deliverables">
+          <span class="deliverable">Alcance detallado</span>
+          <span class="deliverable">Cronograma de entrega</span>
+          <span class="deliverable">Presupuesto transparente</span>
+          <span class="deliverable">ROI estimado</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-circle">03</div>
+      <div class="step-body">
+        <div class="step-tag">EXECUTION</div>
+        <h3>Ejecución con Visibilidad Total</h3>
+        <p>
+          Una vez aprobada la propuesta, comenzamos a ejecutar. Trabajamos en sprints cortos con entregas frecuentes para que puedas ver el avance desde las primeras semanas. Nunca desaparecemos durante semanas para reaparecer con algo que no esperabas.
+        </p>
+        <p>
+          Tendrás acceso a actualizaciones constantes, reuniones de seguimiento y un canal directo de comunicación con el equipo. Si algo necesita ajustarse en el camino, lo ajustamos. La flexibilidad y la transparencia no son extras — son parte de nuestra forma de trabajar.
+        </p>
+        <div class="step-deliverables">
+          <span class="deliverable">Sprints de entrega cortos</span>
+          <span class="deliverable">Actualizaciones constantes</span>
+          <span class="deliverable">Canal directo con el equipo</span>
+          <span class="deliverable">Flexibilidad ante cambios</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-circle">04</div>
+      <div class="step-body">
+        <div class="step-tag">GROWTH</div>
+        <h3>Soporte y Crecimiento Continuo</h3>
+        <p>
+          La entrega del proyecto no es el fin de la relación — es el comienzo. Nos aseguramos de que todo lo que construimos funcione perfectamente, capacitamos a tu equipo en el uso de las nuevas herramientas y estamos disponibles para resolver cualquier duda o ajuste que surja.
+        </p>
+        <p>
+          Con el tiempo, nos convertimos en el aliado tecnológico de tu empresa: alguien que conoce tu negocio, entiende tus metas y puede anticipar las soluciones que vas a necesitar antes de que las pidas. Muchos de nuestros clientes empiezan con un proyecto y terminan confiándonos toda su estrategia digital.
+        </p>
+        <div class="step-deliverables">
+          <span class="deliverable">Soporte post-entrega</span>
+          <span class="deliverable">Capacitación al equipo</span>
+          <span class="deliverable">Monitoreo y optimización</span>
+          <span class="deliverable">Propuestas de mejora continua</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="commitment">
+  <p class="section-label reveal">Nuestro compromiso</p>
+  <h2 class="section-title reveal">Lo que Puedes<br/>Esperar Siempre<em style="color:var(--teal)">.</em></h2>
+  <div class="commit-grid">
+    <div class="commit-card reveal">
+      <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.4"/><path d="M14 8v6l4 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <h4>Respuesta en 24 Horas</h4>
+      <p>Cualquier mensaje, duda o solicitud recibe respuesta en un máximo de 24 horas. Tu tiempo es valioso y lo respetamos.</p>
+    </div>
+    <div class="commit-card reveal reveal-delay-1">
+      <svg viewBox="0 0 28 28" fill="none"><path d="M4 14h20M14 4l10 10-10 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h4>Entregas Puntuales</h4>
+      <p>Cumplimos los plazos acordados. Si algo cambia, te avisamos con anticipación y buscamos la mejor solución juntos.</p>
+    </div>
+    <div class="commit-card reveal reveal-delay-2">
+      <svg viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M9 14l4 4 7-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h4>Calidad Garantizada</h4>
+      <p>Si algo no cumple con lo acordado, lo corregimos sin costo adicional y sin cuestionamientos. Punto.</p>
+    </div>
+    <div class="commit-card reveal">
+      <svg viewBox="0 0 28 28" fill="none"><path d="M14 4l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <h4>Sin Letra Chica</h4>
+      <p>El precio que acordamos es el precio que pagas. Sin cargos ocultos, sin extras no discutidos, sin sorpresas al final.</p>
+    </div>
+    <div class="commit-card reveal reveal-delay-1">
+      <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M4 24c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <h4>Interlocutor Directo</h4>
+      <p>Siempre hablas con alguien del equipo que conoce tu proyecto. Nunca con alguien que no sabe quién eres.</p>
+    </div>
+    <div class="commit-card reveal reveal-delay-2">
+      <svg viewBox="0 0 28 28" fill="none"><path d="M4 20V8l10-4 10 4v12l-10 4-10-4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <h4>Confidencialidad Total</h4>
+      <p>La información de tu negocio es confidencial. Nunca la compartimos, nunca la usamos para otro propósito.</p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+  injectNav('proceso.html');
+  injectFooter();
+  initParticleBg('proc-canvas');
+</script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Servicios — CMOC Digital Consulting</title>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+/* PAGE HERO */
+.page-hero {
+  padding: 10rem 5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#svc-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page-hero-inner { position: relative; z-index: 1; max-width: 700px; }
+
+.page-hero-inner p.section-label { animation: fadeUp 0.5s ease 0.1s both; opacity: 0; }
+.page-hero-inner h1 { animation: fadeUp 0.6s ease 0.2s both; opacity: 0; }
+.page-hero-inner p.lead { animation: fadeUp 0.6s ease 0.35s both; opacity: 0; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.85;
+  max-width: 580px;
+  margin-top: 1rem;
+}
+
+/* SERVICIO SECTION */
+.svc-section {
+  padding: 6rem 5rem;
+  position: relative;
+}
+
+.svc-section:nth-child(even) { background: var(--black2); }
+.svc-section:nth-child(odd)  { background: var(--black); }
+
+.svc-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,204,0.12), transparent);
+}
+
+.svc-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.svc-inner.reverse { grid-template-columns: 1.6fr 1fr; }
+.svc-inner.reverse .svc-meta { order: 2; }
+.svc-inner.reverse .svc-detail { order: 1; }
+
+.svc-meta {}
+
+.svc-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  color: rgba(0,229,204,0.35);
+  margin-bottom: 1.5rem;
+}
+
+.svc-icon-wrap {
+  width: 56px;
+  height: 56px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(0,229,204,0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+  margin-bottom: 1.5rem;
+}
+
+.svc-icon-wrap svg { width: 26px; height: 26px; }
+
+.svc-meta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.svc-meta p.desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+}
+
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--teal);
+  letter-spacing: 1px;
+}
+
+/* DETAIL PANEL */
+.svc-detail {}
+
+.svc-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(0,229,204,0.07);
+  border: 1px solid rgba(0,229,204,0.07);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.svc-item {
+  background: var(--black3);
+  padding: 1.4rem 1.6rem;
+  transition: background 0.2s;
+}
+
+.svc-item:hover { background: rgba(0,229,204,0.04); }
+
+.svc-item h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.2px;
+}
+
+.svc-item p {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+}
+
+.svc-item .item-dot {
+  width: 5px; height: 5px;
+  background: var(--teal);
+  border-radius: 50%;
+  margin-bottom: 0.8rem;
+}
+
+/* why card */
+.svc-why {
+  background: var(--teal-dim);
+  border: 1px solid rgba(0,229,204,0.12);
+  border-radius: 8px;
+  padding: 1.4rem 1.6rem;
+}
+
+.svc-why p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+}
+
+.svc-why strong { color: var(--teal); font-weight: 500; }
+
+/* MOBILE */
+@media (max-width: 1000px) {
+  .svc-inner, .svc-inner.reverse {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .svc-inner.reverse .svc-meta,
+  .svc-inner.reverse .svc-detail { order: unset; }
+  .page-hero, .svc-section { padding: 6rem 1.5rem 3rem; }
+}
+
+@media (max-width: 600px) {
+  .svc-items-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="noise">
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <canvas id="svc-canvas"></canvas>
+  <div class="page-hero-inner">
+    <p class="section-label">Lo que hacemos</p>
+    <h1 class="section-title">Servicios Diseñados<br/>Para Hacer Crecer<br/><em style="color:var(--teal)">Tu Negocio.</em></h1>
+    <p class="lead">
+      Cada solución que construimos parte de una pregunta simple: ¿qué necesita este negocio para ser más eficiente, más visible y más rentable? No vendemos paquetes genéricos — diseñamos exactamente lo que tu empresa necesita.
+    </p>
+  </div>
+</div>
+
+<!-- ── 01 CONSULTORÍA ── -->
+<section class="svc-section" id="consultoria">
+  <div class="svc-inner">
+    <div class="svc-meta reveal">
+      <div class="svc-num">01 / 06</div>
+      <div class="svc-icon-wrap">
+        <svg viewBox="0 0 26 26" fill="none">
+          <rect x="2" y="5" width="22" height="16" rx="2" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 13l4 4 6-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Consultoría<br/>Estratégica</h2>
+      <p class="desc">
+        Antes de invertir en tecnología, necesitas saber exactamente qué necesitas y por qué. Nuestro equipo analiza tu operación actual, identifica cuellos de botella, oportunidades ocultas y traza una hoja de ruta digital que se traduce en resultados tangibles.
+      </p>
+      <p class="desc">
+        Con experiencia en proyectos de nivel enterprise, traemos metodologías probadas en las organizaciones más exigentes del país — ahora accesibles para tu negocio.
+      </p>
+    </div>
+    <div class="svc-detail reveal reveal-delay-2">
+      <div class="svc-items-grid">
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Diagnóstico Digital</h4>
+          <p>Análisis completo de tu presencia y operación digital actual. Sin costo, sin compromiso.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Roadmap de Transformación</h4>
+          <p>Plan de acción priorizado con iniciativas, tiempos y ROI estimado para cada etapa.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Diagnóstico de Ciberseguridad</h4>
+          <p>Evaluación de riesgos, vulnerabilidades y recomendaciones para proteger tu negocio.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Adopción de Herramientas</h4>
+          <p>Te ayudamos a elegir e implementar el stack tecnológico ideal para tu operación.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Documentación de Procesos</h4>
+          <p>Mapeo y documentación de tus procesos actuales como base para su optimización.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Consultoría Continua</h4>
+          <p>Acompañamiento mensual para asegurar que tu estrategia digital evolucione con tu negocio.</p>
+        </div>
+      </div>
+      <div class="svc-why">
+        <p>La mayoría de los negocios invierte en tecnología sin saber si es lo que realmente necesitan. Nosotros nos aseguramos de que <strong>cada peso que inviertas genere el mayor retorno posible</strong> antes de tocar una sola línea de código.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 02 AUTOMATIZACIÓN ── -->
+<section class="svc-section" id="automatizacion">
+  <div class="svc-inner reverse">
+    <div class="svc-detail reveal">
+      <div class="svc-items-grid">
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>WhatsApp Business</h4>
+          <p>Respuestas automáticas, catálogos, citas y seguimiento de clientes sin intervención manual.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Flujos con N8n / Make</h4>
+          <p>Conectamos tus aplicaciones para que trabajen juntas automáticamente. Zapier, Make, n8n.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Dashboards Operativos</h4>
+          <p>Visualiza en tiempo real ventas, inventario, desempeño y KPIs clave de tu negocio.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Chatbot con IA</h4>
+          <p>Atención al cliente 24/7 por WhatsApp o tu sitio web. Responde, cotiza y agenda solo.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Facturación Automática</h4>
+          <p>Generación y envío de CFDI automático integrado a tu proceso de venta.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Integración de Sistemas</h4>
+          <p>Hacemos que tu CRM, inventario, facturación y e-commerce se comuniquen entre sí.</p>
+        </div>
+      </div>
+      <div class="svc-why">
+        <p>Una empresa que automatiza sus procesos repetitivos <strong>reduce errores hasta en un 80% y libera tiempo valioso</strong> que su equipo puede invertir en atención al cliente y crecimiento real.</p>
+      </div>
+    </div>
+    <div class="svc-meta reveal reveal-delay-1">
+      <div class="svc-num">02 / 06</div>
+      <div class="svc-icon-wrap">
+        <svg viewBox="0 0 26 26" fill="none">
+          <path d="M4 20l6-6 4 4 8-10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="6" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+      </div>
+      <h2>Automatización<br/>Y Procesos</h2>
+      <p class="desc">
+        El tiempo de tu equipo es tu recurso más valioso. Identificamos todas las tareas manuales, repetitivas y propensas a error en tu operación y las convertimos en flujos automáticos que funcionan 24 horas al día, 7 días a la semana.
+      </p>
+      <p class="desc">
+        Desde el seguimiento de clientes por WhatsApp hasta la generación automática de reportes — hacemos que tu negocio opere de forma más inteligente, no más laboriosa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 PRESENCIA DIGITAL ── -->
+<section class="svc-section" id="presencia">
+  <div class="svc-inner">
+    <div class="svc-meta reveal">
+      <div class="svc-num">03 / 06</div>
+      <div class="svc-icon-wrap">
+        <svg viewBox="0 0 26 26" fill="none">
+          <rect x="2" y="4" width="22" height="15" rx="2" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M9 23h8M13 19v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2>Presencia<br/>Digital</h2>
+      <p class="desc">
+        Si tu negocio no existe en internet, para millones de clientes potenciales simplemente no existe. Construimos tu presencia digital desde cero o la transformamos si ya tienes algo que no está funcionando.
+      </p>
+      <p class="desc">
+        Diseñamos páginas web y tiendas en línea modernas, rápidas y optimizadas para que Google las encuentre — y tus clientes no puedan resistirse.
+      </p>
+    </div>
+    <div class="svc-detail reveal reveal-delay-2">
+      <div class="svc-items-grid">
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Página Web Profesional</h4>
+          <p>Diseño moderno, mobile-ready, con dominio y hosting incluido el primer año.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Tienda en Línea</h4>
+          <p>E-commerce completo con carrito, pasarela de pagos y gestión de inventario.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>SEO Local y Google</h4>
+          <p>Google My Business, posicionamiento local y optimización para buscadores.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Landing Pages</h4>
+          <p>Páginas de conversión para campañas específicas, diseñadas para capturar leads.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Optimización Web</h4>
+          <p>Velocidad, rendimiento móvil, SEO técnico y experiencia de usuario mejorada.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Mantenimiento Mensual</h4>
+          <p>Tu sitio actualizado, seguro y funcionando siempre. Incluye actualizaciones y monitoreo continuo.</p>
+        </div>
+      </div>
+      <div class="svc-why">
+        <p>El 75% de los consumidores juzga la credibilidad de una empresa por su sitio web. Un sitio mal diseñado o desactualizado <strong>cuesta clientes todos los días.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 DESARROLLO ── -->
+<section class="svc-section" id="desarrollo">
+  <div class="svc-inner reverse">
+    <div class="svc-detail reveal">
+      <div class="svc-items-grid">
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Punto de Venta (POS)</h4>
+          <p>Sistema de ventas a la medida de tu negocio: inventario, caja, reportes y más.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>CRM a la Medida</h4>
+          <p>Gestión de clientes, seguimiento de ventas y automatización del pipeline comercial.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Sistema de Agendamiento</h4>
+          <p>Ideal para consultorios, salones y servicios. Citas en línea, recordatorios automáticos.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>App Web o Móvil</h4>
+          <p>Aplicaciones completas para Android, iOS o web según las necesidades de tu negocio.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Sistema de Pedidos</h4>
+          <p>Plataforma de pedidos en línea con gestión de cocina o almacén integrada.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Portal de Clientes</h4>
+          <p>Extranet donde tus clientes pueden consultar pedidos, facturas y estado de servicios.</p>
+        </div>
+      </div>
+      <div class="svc-why">
+        <p>Las soluciones genéricas te hacen adaptar tu negocio al software. Nosotros hacemos lo contrario: <strong>el software se adapta exactamente a cómo opera tu empresa.</strong></p>
+      </div>
+    </div>
+    <div class="svc-meta reveal reveal-delay-1">
+      <div class="svc-num">04 / 06</div>
+      <div class="svc-icon-wrap">
+        <svg viewBox="0 0 26 26" fill="none">
+          <path d="M8 6h10l4 5-4 5H8L4 11l4-5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M13 16v6M9 22h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2>Desarrollo<br/>A la Medida</h2>
+      <p class="desc">
+        Cuando no existe la herramienta perfecta para tu negocio, la construimos. Nuestro equipo de ingenieros y desarrolladores diseña sistemas, aplicaciones y software que encajan exactamente en tu operación.
+      </p>
+      <p class="desc">
+        Trabajamos con las tecnologías más modernas y probadas para garantizar que lo que construimos sea escalable, seguro y fácil de usar por tu equipo desde el primer día.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 GESTIÓN IT ── -->
+<section class="svc-section" id="it">
+  <div class="svc-inner">
+    <div class="svc-meta reveal">
+      <div class="svc-num">05 / 06</div>
+      <div class="svc-icon-wrap">
+        <svg viewBox="0 0 26 26" fill="none">
+          <rect x="2" y="8" width="22" height="15" rx="2" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M9 5h8M11 5v3M15 5v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="13" cy="15" r="3" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+      </div>
+      <h2>Gestión IT<br/>Integral</h2>
+      <p class="desc">
+        Muchas empresas pierden tiempo valioso lidiando con problemas tecnológicos que las distraen de lo que realmente importa: crecer. Nos convertimos en el departamento de IT que tu empresa necesita — sin el costo de tenerlo internamente.
+      </p>
+      <p class="desc">
+        Gestionamos toda la infraestructura tecnológica de tu negocio: aplicaciones, licencias, accesos, servidores, respaldos y soporte. Tú te dedicas a tu negocio. Nosotros nos encargamos del resto.
+      </p>
+    </div>
+    <div class="svc-detail reveal reveal-delay-2">
+      <div class="svc-items-grid">
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Soporte y Mantenimiento</h4>
+          <p>Resolución de incidencias, actualizaciones y mantenimiento preventivo de todos tus sistemas.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Administración de SaaS</h4>
+          <p>Gestionamos Office 365, Google Workspace, Slack y todas las herramientas que usa tu equipo.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Gestión de Accesos</h4>
+          <p>Control de usuarios, permisos y licencias. Seguridad y orden en quién accede a qué.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Monitoreo y Hosting</h4>
+          <p>Vigilamos que tus sistemas estén disponibles 24/7 y actuamos antes de que haya problemas.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Respaldo de Datos</h4>
+          <p>Tu información siempre protegida y recuperable. Nunca más pierdas datos importantes.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Helpdesk para tu Equipo</h4>
+          <p>Soporte técnico directo para los colaboradores de tu empresa cuando lo necesiten.</p>
+        </div>
+      </div>
+      <div class="svc-why">
+        <p>Un problema técnico no resuelto puede costarle a tu negocio horas o días de operación. Con gestión IT proactiva, <strong>prevenimos los problemas antes de que afecten tu operación.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 MARKETING ── -->
+<section class="svc-section" id="marketing">
+  <div class="svc-inner reverse">
+    <div class="svc-detail reveal">
+      <div class="svc-items-grid">
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Identidad Visual</h4>
+          <p>Logo, paleta de colores, tipografía y manual de marca. La base de todo lo demás.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Gestión de Redes Sociales</h4>
+          <p>Estrategia, contenido, calendario editorial y publicación. Presencia constante y profesional.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Google Ads y Meta Ads</h4>
+          <p>Campañas de pago optimizadas para maximizar cada peso de tu presupuesto publicitario.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Email Marketing</h4>
+          <p>Estrategia de correo electrónico para retener clientes y aumentar ventas recurrentes.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Contenido y Fotografía</h4>
+          <p>Coordinación de contenido visual y fotográfico para redes, web y campañas.</p>
+        </div>
+        <div class="svc-item">
+          <div class="item-dot"></div>
+          <h4>Análisis y Reportes</h4>
+          <p>Métricas claras de cada canal: qué funciona, qué no, y cómo mejorar mes a mes.</p>
+        </div>
+      </div>
+      <div class="svc-why">
+        <p>No basta con existir en internet — hay que ser encontrado y recordado. <strong>Una estrategia de marketing digital bien ejecutada multiplica el retorno de cualquier otra inversión tecnológica.</strong></p>
+      </div>
+    </div>
+    <div class="svc-meta reveal reveal-delay-1">
+      <div class="svc-num">06 / 06</div>
+      <div class="svc-icon-wrap">
+        <svg viewBox="0 0 26 26" fill="none">
+          <path d="M4 22c4-7 10-12 18-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="20" cy="9" r="4" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M5 13c2-2 5-3 7-1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2>Marketing<br/>Digital</h2>
+      <p class="desc">
+        Tener una buena operación no es suficiente si nadie sabe que existes. Diseñamos y ejecutamos estrategias de marketing digital que posicionan tu marca, atraen nuevos clientes y fidelizan a los que ya tienes.
+      </p>
+      <p class="desc">
+        Cada canal tiene su lógica y su audiencia. Nuestro equipo sabe exactamente cómo hacer que tu inversión en marketing trabaje de forma eficiente y medible, con resultados que puedes ver mes a mes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+  injectNav('servicios.html');
+  injectFooter();
+  initParticleBg('svc-canvas');
+</script>
+</body>
+</html>
